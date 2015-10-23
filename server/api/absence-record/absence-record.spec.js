@@ -23,13 +23,6 @@ describe('AbsenceRecord Model', function() {
     });
   });
 
-  it('should begin with no records', function(done) {
-    AbsenceRecord.find({}, function(err, records) {
-      records.should.have.length(0);
-      done();
-    });
-  });
-
   it('should have a created_at virtual field', function(done) {
     record.save(function() {
       should.exist(record.created_at);
