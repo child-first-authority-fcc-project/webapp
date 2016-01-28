@@ -15,6 +15,7 @@ app.controller('PDFUploadCtrl',
     $scope.data = {upload: {school: $scope.defaultSchool}};
 
     $scope.upload = function(file) {
+      $scope.uploadschool = $scope.data.upload.school.name;
       return Upload.upload({
         url: '/api/pdfs/',
         data: {file: file, schoolId: $scope.data.upload.school._id}
