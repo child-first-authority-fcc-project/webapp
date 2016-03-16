@@ -2,8 +2,31 @@
 
 var app = angular.module('app');
 
-function StudentCtrl($scope, $state, $stateParams, Student, toastr) {
+function StudentCtrl($scope, $state, $stateParams, Student, 
+  AbsenceRecord, toastr) {
   $scope.student = Student.get({id: $stateParams.id});
+  $scope.percentage;
+  $scope.calcPercentage = function() {
+    AbsenceRecord.current(function(data) {
+      var totPresent = [];
+      var totEnrolled = [];
+      var addToNext = function(prev, cur) {
+        return prev + cur;
+      };
+      data.forEach(function(d) {
+        totPresent.push(d.entries.present);
+        totEnrolled.push(d.entries.enrolled);
+      });
+      $scope.percentage = Math.floor(
+        (totPresent.reduce(addToNext) / totEnrolled.reduce(addToNext))
+        * 100);
+    }, function(err) {
+      console.warn(err);
+    });
+    
+  };
+
+  $scope.calcPercentage();
 
   $scope.updateIEP = function() {
     var oldValue = !$scope.student.iep;
