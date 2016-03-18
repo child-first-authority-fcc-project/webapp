@@ -2,7 +2,8 @@
 
 var app = angular.module('app');
 
-function StudentCtrl($scope, $state, $stateParams, Student, toastr) {
+function StudentCtrl($scope, $state, $stateParams, Student, 
+  AbsenceRecord, toastr) {
   $scope.student = Student.get({id: $stateParams.id});
   $scope.student.$promise.then(function(student) {
     _.forEach(student.interventions, function(intervention) {
@@ -12,6 +13,26 @@ function StudentCtrl($scope, $state, $stateParams, Student, toastr) {
       }
     });
   });
+
+  $scope.calcPercentage = function() {
+    AbsenceRecord.current()
+      .$promise.then(function(records) {
+        var totPresent = [];
+        var totEnrolled = [];
+        var addToNext = function(prev, cur) {
+          return prev + cur;
+        };
+        records.forEach(function(record) {
+          totPresent.push(record.entries.present);
+          totEnrolled.push(record.entries.enrolled);
+        });
+        $scope.percentage = Math.floor(
+          (totPresent.reduce(addToNext) / totEnrolled.reduce(addToNext))
+          * 100);
+      });
+  };
+
+  $scope.calcPercentage();
 
   $scope.updateIEP = function() {
     var oldValue = !$scope.student.iep;
