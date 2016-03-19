@@ -198,6 +198,49 @@ exports.chronic = function(req, res) {
   });
 };
 
+function getStudentData(unfilteredArr, stuId) {
+  var total = {};     
+  var entryArr = _.remove(_.map(unfilteredArr, function(entry) {
+    var arrId = String(entry.entries.student._id);
+    if(arrId === stuId) {
+      delete entry.student;
+      return entry.entries;
+    }
+  }), undefined);
+  _.forEach(AbsenceRecord.schema.paths
+    .entries
+    .schema
+    .paths, function(val, key) {
+      if(key !== 'student' && key !== '_id') total[key] = '';
+    });    
+  _.forEach(total, function(val, key) {
+    total[key] = _.map(entryArr, key)
+      .reduce(function(prev,curr) {
+        return prev + curr;
+      });
+  });
+  return total;
+}
+
+/**
+ * Returns an object of total absence record data for 
+ * selected student.
+ *
+ */
+exports.student = function(req, res) {
+  var matchId = req.params.id;
+  var pipeline = currentAbsenceRecordPipeline(req.user);
+  AbsenceRecord.aggregate(pipeline, function(err, results) {
+    if (err) return handleError(res, err);
+    AbsenceRecord.populate(results, 'school entries.student',
+      function(err, entries) {
+        if (err) return handleError(res, err);
+        var result = getStudentData(entries, String(matchId));
+        return res.status(200).json(result);
+      });
+  });
+};
+
 function handleError(res, err) {
   return res.status(500).send(err);
 }

@@ -27,4 +27,8 @@ router.get('/current/chronic',
   auth.hasRole('teacher'),
   controller.chronic);
 
+router.get('/:id/current/student',
+  auth.hasRole('teacher'),
+  controller.student);
+
 module.exports = router;
