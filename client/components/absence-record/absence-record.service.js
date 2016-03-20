@@ -12,6 +12,14 @@ app.factory('AbsenceRecord', function($resource) {
       params: {
         controller: 'current'
       }
+    },
+    
+    student: {
+      method: 'GET',
+      params: {
+        controller: 'current',
+        selector: 'student'
+      }
     }
   });
 });
