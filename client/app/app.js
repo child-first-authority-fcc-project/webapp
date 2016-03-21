@@ -6,7 +6,6 @@ var app = angular.module('app', [
   'ngMessages',
   'ngResource',
   'ngSanitize',
-  'ngFileUpload',
   'ui.bootstrap',
   'ui.grid',
   'ui.grid.autoResize',
