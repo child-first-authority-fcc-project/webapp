@@ -3,14 +3,17 @@
 var app = angular.module('app');
 
 function StudentCtrl($scope, $state, $stateParams, Student, toastr, Modal) {
-  $scope.student = Student.get({id: $stateParams.id});
-  $scope.student.$promise.then(function(student) {
-    _.forEach(student.interventions, function(intervention) {
+  Student.get({id: $stateParams.id}, function(result) {
+    _.forEach(result.interventions, function(intervention) {
       // Replaces actionDates with Date objects expected by uib-datepicker.
+      intervention.triggerDate = new Date(intervention.triggerDate);
       if (intervention.actionDate) {
         intervention.actionDate = new Date(intervention.actionDate);
       }
     });
+    $scope.student = result.student;
+    $scope.interventions = result.interventions;
+    $scope.outreaches = result.outreaches;
   });
 
   Student.currentData({id: $stateParams.id}, 
@@ -79,7 +82,7 @@ function StudentInterventionCtrl($scope, Intervention, toastr) {
   $scope.open = function(index) {
     $scope.datePopups[index] = true;
   };
-  $scope.maxDate = Date.now();
+  $scope.maxDate = new Date();
 
   $scope.updateActionDate = function(intervention) {
     Intervention.updateAction(
@@ -173,7 +176,7 @@ function StudentOutreachesCtrl($scope, Outreach, Modal, toastr) {
         model.school = $scope.student.currentSchool._id;
         return Outreach.save({}, model, function(res) {
           $scope.$evalAsync(function() {
-            $scope.student.outreaches.push(res);
+            $scope.outreaches.unshift(res);
           });
         });
       };
