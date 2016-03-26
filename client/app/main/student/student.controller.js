@@ -23,7 +23,7 @@ function StudentCtrl($scope, $state, $stateParams, Student, toastr, Modal) {
         Math.floor((entry.present / entry.enrolled) * 100);
   }, function(err) {
     console.warn(err);
-  })
+  });
 
   $scope.updateIEP = function() {
     var oldValue = !$scope.student.iep;

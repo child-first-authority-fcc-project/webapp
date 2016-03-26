@@ -3,7 +3,7 @@
 var app = angular.module('app');
 
 function AdminCtrl($scope, $http, uiGridConstants, Auth, User, School,
-  Modal, ROLES) {
+  Modal, ROLES, toastr) {
   $scope.roles = ROLES.slice(0, ROLES.indexOf(Auth.getCurrentUser().role) + 1);
   $scope.auth = Auth;
 
@@ -82,7 +82,7 @@ function AdminCtrl($scope, $http, uiGridConstants, Auth, User, School,
     enableSorting: false,
     cellClass: 'action-col',
     cellTemplate: 'app/main/admin/partial/cell.action.html',
-    enableCellEdit: false,
+    enableCellEdit: false
   }];
 
   $scope.userGridOptions.onRegisterApi = function(gridApi) {
@@ -144,6 +144,13 @@ function AdminCtrl($scope, $http, uiGridConstants, Auth, User, School,
     name: 'name',
     displayName: 'Name',
     minWidth: 300
+  },{
+    name: 'Actions',
+    width: 108,
+    enableSorting: false,
+    cellClass: 'action-col',
+    cellTemplate: 'app/main/admin/partial/cell.action-school.html',
+    enableCellEdit: false
   }];
 
   $scope.schoolGridOptions.onRegisterApi = function(gridApi) {
@@ -154,7 +161,11 @@ function AdminCtrl($scope, $http, uiGridConstants, Auth, User, School,
   $scope.deleteSchool = function(school) {
     var deleteSchoolFn = function() {
       School.remove({id: school._id}).$promise.then(function() {
-        _.pull($scope.data.schools, school);
+        _.pull($scope.schoolGridOptions.data, school);
+        toastr.warning(
+          'school ' + school.name + 
+          ' has been removed. All associated students archived.',
+          {timeOut: 3000, closeButton: true});
       });
     };
     Modal.confirm.delete(deleteSchoolFn)(school.name);
