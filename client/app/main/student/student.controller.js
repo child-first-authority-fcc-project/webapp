@@ -14,6 +14,16 @@ function StudentCtrl($scope, $state, $stateParams, Student, toastr, Modal) {
     $scope.student = result.student;
     $scope.interventions = result.interventions;
     $scope.outreaches = result.outreaches;
+    Student.list({id: $stateParams.id}, function(data) {
+      var record = data.currentRecord.entries;
+      var enrolled = 0;
+      var present = 0;
+      _.forEach(record, function(entry) {
+        enrolled += entry.enrolled;
+        present += entry.present;
+      });
+      $scope.percentage = Math.floor( (present / enrolled) * 100 );
+    })
   });
 
   $scope.updateIEP = function() {

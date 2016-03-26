@@ -7,8 +7,7 @@ app.factory('Student', function($resource) {
     id: '@_id'
   }, {
     list: {
-      method: 'GET',
-      isArray: true
+      method: 'GET'
     },
     updateIEP: {
       method: 'PUT',
