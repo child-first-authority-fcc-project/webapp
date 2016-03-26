@@ -10,6 +10,13 @@ app.factory('Student', function($resource) {
       method: 'GET',
       isArray: true
     },
+    currentData: {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'current'
+      }
+    },
     updateIEP: {
       method: 'PUT',
       params: {

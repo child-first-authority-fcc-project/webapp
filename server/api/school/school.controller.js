@@ -99,13 +99,21 @@ exports.updateTriggers = function(req, res) {
 };
 
 /**
- * Deletes a school from the DB.
+ * Deletes a school from the DB. 
+ * Archives all associated students.
  * restriction: 'admin'
  */
 exports.destroy = function(req, res) {
   School.findById(req.params.id, function(err, school) {
     if (err) return handleError(res, err);
     if (!school) return res.status(404).send('Not Found');
+    Student
+      .update({currentSchool: school}, 
+        {active: false}, 
+        {multi: true}, 
+        function(err, result){
+        console.log('STUDENTS UNACTIVE', result);
+      });
     school.remove(function(err) {
       if (err) return handleError(res, err);
       return res.status(204).send('No Content');
