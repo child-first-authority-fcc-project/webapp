@@ -3,7 +3,6 @@
 
 var express = require('express');
 var controller = require('./student.controller');
-var absenceRecord = require('../absence-record/absence-record.controller');
 var auth = require('../../auth/auth.service');
 
 var router = express.Router();
@@ -14,7 +13,6 @@ router.get('/', auth.hasRole('manager'), controller.index);
 router.get('/:id', auth.hasRole('teacher'), controller.show);
 router.put('/:id/iep', auth.hasRole('teacher'), controller.updateIEP);
 router.put('/:id/cfa', auth.hasRole('teacher'), controller.updateCFA);
-router.get('/:id/current', auth.hasRole('teacher'), absenceRecord.student);
 
 /**
  * TODO: LOCK DOWN ROUTES WITH AUTH ROLE CHECKS

@@ -232,28 +232,6 @@ exports.chronic = function(req, res) {
   });
 };
 
-/**
- * Simmilar to the chronic and atRisk querries, except we filter by student id.
- * restriction: 'teacher'
- *
- */
-exports.student = function(req, res) {
-  var id = mongoose.Types.ObjectId;
-  var pipeline = currentAbsenceRecordPipeline(req.user);
-  pipeline.push({
-    $match: {'entries.student': id(req.params.id)}
-  });
-  AbsenceRecord.aggregate(pipeline, function(err, results) {
-    if(err) return handleError(res, err);
-    AbsenceRecord.populate(results, '-school -entries.student',
-      function(err, entries) {
-        if (err) return handleError(res, err);
-        console.log(entries);
-        return res.status(200).json(entries);
-      });
-  });
-};
-
 function handleError(res, err) {
   return res.status(500).send(err);
 }
