@@ -16,6 +16,15 @@ function StudentCtrl($scope, $state, $stateParams, Student, toastr, Modal) {
     $scope.interventions = result.interventions;
   });
 
+  Student.currentData({id: $stateParams.id}, 
+    function(data) {
+      var entry = data[0].entries;
+      $scope.percent = 
+        Math.floor((entry.present / entry.enrolled) * 100);
+  }, function(err) {
+    console.warn(err);
+  });
+
   $scope.updateIEP = function() {
     var oldValue = !$scope.student.iep;
     Student.updateIEP({
