@@ -1,6 +1,5 @@
 <div class="student row">
-  <heading title="student.firstName + ' ' +
-student.lastName"></heading>
+  <heading title="student.firstName + ' ' + student.lastName"></heading>
   <div class="info">
     <div class="form-horizontal">
       <label class="col-lg-2 control-label">Student Id</label>
@@ -9,7 +8,7 @@ student.lastName"></heading>
       </div>
       <label class="col-lg-2 control-label">Attendance Percentage</label>
       <div class="col-lg-2">
-        <p class="form-control-static">{{percentage}}%</p>
+        <p class="form-control-static">{{percentage | number: 2}}%</p>
       </div>
       <label class="col-lg-2 control-label">School</label>
       <div class="col-lg-2">

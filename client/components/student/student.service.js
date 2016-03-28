@@ -6,9 +6,6 @@ app.factory('Student', function($resource) {
   return $resource('/api/students/:id/:controller', {
     id: '@_id'
   }, {
-    list: {
-      method: 'GET'
-    },
     updateIEP: {
       method: 'PUT',
       params: {
