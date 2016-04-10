@@ -74,7 +74,7 @@
     }
   }
   .ui-grid-viewport {
-    @include cfa-scrollbar(5px, 0, $pale-turquoise);
+    @include cfa-scrollbar(5px, 0, $pale);
   }
   .ui-grid-menu-button .ui-grid-menu {
     // The menu button is inset by 1px use 53 instead of 54px

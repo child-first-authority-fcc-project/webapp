@@ -13,8 +13,8 @@ sidebar {
   display: flex;
   flex-direction: column;
   flex: 1;
-  background-color: $teal;
-  background: linear-gradient(to right, $teal-d05, $teal);
+  background-color: white;
+  box-shadow: inset -2px 0px 0px 0px rgba(45,35,46,0.4);
   width: 250px;
   margin: 0;
   padding: 0;
@@ -39,13 +39,12 @@ sidebar {
     a {
       display: block;
       text-decoration: none;
-      color: #fff;
+      color: #2D232E;
       border-radius: 0;
     }
     a:hover {
-      color: #fff;
-      background-color: $teal-l05;
-      box-shadow: inset 2px 0 0 0 #D35400;
+      color: #2D232E;
+      background-color: #FFB19C;
     }
     &.flex-spacer {
       flex: 1;
@@ -69,7 +68,7 @@ sidebar {
       width: 0;
     }
   }
-  @include cfa-scrollbar(1px, 0, $teal, $teal-d05);
+  @include cfa-scrollbar(1px, 0, $pale-green, $pale-green-d05);
 }
 
 .nav-stacked > li + li {
