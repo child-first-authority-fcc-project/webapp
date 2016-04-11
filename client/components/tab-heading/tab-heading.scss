@@ -2,7 +2,7 @@
 .tab-heading.navbar-default {
   position: relative;
   width: 100%;
-  background-color: $light-sky-blue;
+  background-color: $medium-tope;
   padding: 0;
   margin: 0;
   border: none;
@@ -11,10 +11,10 @@
     content: none;
   }
   li.active {
-    background-color: $light-sky-blue-d10;
+    background-color: $medium-tope-d10;
   }
   li:hover:not(.dropdown) {
-    background-color: $light-sky-blue-d15;
+    background-color: $medium-tope-d15;
   }
   ul.dropdown-menu li {
     background: none;
@@ -39,17 +39,17 @@
     }
   }
   .navbar-collapse {
-    background-color: $light-sky-blue;
+    background-color: $medium-tope;
   }
   .navbar-toggle {
     margin-right: 8px;
-    background-color: $light-sky-blue;
+    background-color: $medium-tope;
     color: $cfa-blue-d10;
     border: 1px solid $cfa-blue-d10;
     border-radius: 4px;
     padding: 8px 10px;
     &:hover {
-      background-color: $light-sky-blue-l10;
+      background-color: $medium-tope-l10;
     }
   }
   .menu-separator {
@@ -57,7 +57,7 @@
     margin-bottom: 5px;
   }
   .navbar-nav > li:not(.dropdown) {
-    border-right: 1px $light-sky-blue-l10 solid;
+    border-right: 1px $medium-tope-l10 solid;
   }
   .navbar-collapse {
     padding: 0;
@@ -77,7 +77,7 @@
       width: 38px;
       height: 38px;
       &:hover {
-        background-color: $light-sky-blue-l10;
+        background-color: $medium-tope-l10;
       }
     }
   }
@@ -117,7 +117,7 @@
       }
     }
     ul.navbar-right {
-      background-color: $light-sky-blue-l15;
+      background-color: $medium-tope-l15;
       .dropdown-menu-item {
         a {
           padding: 3.5px 0;

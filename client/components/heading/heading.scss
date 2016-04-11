@@ -3,8 +3,8 @@
   position: relative;
   width: 100%;
   height: $cfa-unit;
-  background-color: $deep-sky-blue;
-  background: linear-gradient(to right, $deep-sky-blue-d05, $deep-sky-blue);
+  background-color: $light-tope;
+  background: linear-gradient(to right, $light-tope-d05, $light-tope);
   padding: 0;
   margin: 0;
   border: none;
@@ -42,7 +42,7 @@
     border: 1px solid $cfa-blue;
     border-radius: 4px;
     &:hover {
-      background-color: $deep-sky-blue-l10;
+      background-color: $light-tope-l10;
     }
   }
   .dropdown-menu {
