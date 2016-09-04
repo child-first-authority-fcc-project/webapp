@@ -175,7 +175,7 @@ function DashboardCtrl($scope, $timeout, AbsenceRecord, GridDefaults, Student) {
     return 'Students' +
            ($scope.filter.type ? ' (' + $scope.filter.type +
            ($scope.filter.tier ? ' #' + $scope.filter.tier : '') + ')' : '') +
-           (yearFilter ? ` - ${yearFilter}` : ' - all years');
+           (yearFilter ? ' - ' + yearFilter : ' - all years');
   };
   $scope.tableTitle = $scope.makeTitle();
   $scope.$on('withdrawn-updated', updateOutreachCounts);
